@@ -1,0 +1,17 @@
+title: Boats & Cranes
+description: Professional boat crane services
+baseurl: ""
+url: ""
+
+markdown: kramdown
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+sass:
+  style: compressed
+  sass_dir: _sass 
+
+google_calendar:
+  api_key: "YOUR_API_KEY"
+  calendar_id: "YOUR_CALENDAR_ID"

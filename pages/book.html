@@ -1,0 +1,65 @@
+---
+layout: default
+title: Book Crane Service
+permalink: /book/
+---
+
+<div class="booking-container">
+    <h1>Book Crane Service</h1>
+    <form id="bookingForm" class="booking-form">
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="date">Preferred Date</label>
+            <input type="date" id="date" name="date" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="boatLength">Boat Length (meters)</label>
+            <input type="number" id="boatLength" name="boatLength" step="0.1" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="boatWeight">Boat Weight (kg)</label>
+            <input type="number" id="boatWeight" name="boatWeight" required>
+        </div>
+        
+        <button type="submit" class="button">Submit Booking</button>
+    </form>
+</div>
+
+<script src="{{ '/assets/js/calendar.js' | relative_url }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const calendar = new BookingCalendar();
+    
+    document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(e.target);
+        const bookingData = Object.fromEntries(formData);
+        
+        try {
+            // Here you would typically send the booking data to your backend
+            console.log('Booking data:', bookingData);
+            alert('Booking submitted successfully!');
+        } catch (error) {
+            console.error('Error submitting booking:', error);
+            alert('Error submitting booking. Please try again.');
+        }
+    });
+});
+</script> 
