@@ -4,10 +4,19 @@ baseurl: ""
 url: "https://hunsbeth.com"
 domain: hunsbeth.com
 
+# Build settings
 markdown: kramdown
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
+
+# Exclude files from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .git
 
 sass:
   style: compressed
