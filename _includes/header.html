@@ -1,10 +1,25 @@
 <header class="site-header">
     <nav>
-        <a href="{{ '/' | relative_url }}" class="logo">{{ site.title }}</a>
-        <ul>
-            <li><a href="{{ '/' | relative_url }}">Home</a></li>
-            <li><a href="{{ '/book' | relative_url }}">Book</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+        {% assign current_lang = page.lang | default: 'no' %}
+        <a href="/{{ current_lang }}/" class="logo">Naustvik Slipp & Båtbyggeri</a>
+        
+        <button class="menu-toggle" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="/{{ current_lang }}/">{% include i18n.html section='nav' key='home' lang=current_lang %}</a></li>
+                <li><a href="/{{ current_lang }}/facilities/">{% include i18n.html section='nav' key='facilities' lang=current_lang %}</a></li>
+                <li><a href="/{{ current_lang }}/book/">{% include i18n.html section='nav' key='book' lang=current_lang %}</a></li>
+                <li><a href="/{{ current_lang }}/#contact">{% include i18n.html section='nav' key='contact' lang=current_lang %}</a></li>
+            </ul>
+            <div class="language-switcher">
+                <select id="languageSelect" onchange="switchLanguage(this.value)">
+                    <option value="en" {% if current_lang == 'en' %}selected{% endif %}>English</option>
+                    <option value="no" {% if current_lang == 'no' %}selected{% endif %}>Norsk</option>
+                </select>
+            </div>
+        </div>
     </nav>
 </header> 

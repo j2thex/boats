@@ -1,0 +1,53 @@
+---
+layout: default
+title: Home
+---
+
+<div class="home-container">
+    <div class="hero">
+        <h1>{% include i18n.html section='home' key='welcome' %}</h1>
+        <p>{% include i18n.html section='home' key='subtitle' %}</p>
+        <a href="/en/book/" class="button">{% include i18n.html section='home' key='book_now' %}</a>
+    </div>
+
+    <div class="about-section">
+        <h2>{% include i18n.html section='home' key='about.title' %}</h2>
+        <p>{% include i18n.html section='home' key='about.text1' %}</p>
+        <p>{% include i18n.html section='home' key='about.text2' %}</p>
+    </div>
+
+    <div class="features">
+        <div class="feature">
+            <h2>{% include i18n.html section='home' key='features.professional.title' %}</h2>
+            <p>{% include i18n.html section='home' key='features.professional.desc' %}</p>
+        </div>
+        <div class="feature">
+            <h2>{% include i18n.html section='home' key='features.booking.title' %}</h2>
+            <p>{% include i18n.html section='home' key='features.booking.desc' %}</p>
+        </div>
+        <div class="feature">
+            <h2>{% include i18n.html section='home' key='features.safety.title' %}</h2>
+            <p>{% include i18n.html section='home' key='features.safety.desc' %}</p>
+        </div>
+    </div>
+
+    <div class="history-section">
+        <h2>{% include i18n.html section='home' key='history.title' %}</h2>
+        <p>{% include i18n.html section='home' key='history.text1' %}</p>
+        <p>{% include i18n.html section='home' key='history.text2' %}</p>
+        <p>{% include i18n.html section='home' key='history.text3' %}</p>
+    </div>
+
+    <div id="contact" class="contact-section">
+        <h2>{% include i18n.html section='contact' key='address' %}</h2>
+        <p>{% include i18n.html section='contact' key='street' %}<br>
+        {% include i18n.html section='contact' key='city' %}</p>
+
+        <p>{% include i18n.html section='contact' key='phone' %}: {% include i18n.html section='contact' key='phone_number' %}<br>
+        {% include i18n.html section='contact' key='email' %}: {% include i18n.html section='contact' key='email_address' %}</p>
+
+        <h3>{% include i18n.html section='contact' key='hours' %}</h3>
+        <p>{% include i18n.html section='contact' key='weekdays' %}: {% include i18n.html section='contact' key='weekdays_hours' %}<br>
+        {% include i18n.html section='contact' key='weekend' %}: {% include i18n.html section='contact' key='weekend_hours' %}</p>
+    </div>
+</div> 

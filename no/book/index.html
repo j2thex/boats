@@ -1,0 +1,42 @@
+---
+layout: default
+title: Bestill
+lang: no
+---
+
+<div class="booking-container section">
+    <h1>{% include i18n.html section='booking' key='title' %}</h1>
+    
+    <!-- Google Calendar Appointment Scheduling -->
+    <div class="calendar-container">
+        <iframe 
+            id="googleCalendar"
+            style="border: 0" 
+            width="100%" 
+            height="600" 
+            frameborder="0">
+        </iframe>
+    </div>
+
+    <div class="form-container">
+        <h2>{% include i18n.html section='booking' key='additional_details' %}</h2>
+        <form id="bookingForm" class="booking-form">
+            <div class="form-group">
+                <label for="boatLength">{% include i18n.html section='booking' key='boat_length' %}</label>
+                <input type="number" id="boatLength" name="boatLength" step="0.1" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="boatWeight">{% include i18n.html section='booking' key='boat_weight' %}</label>
+                <input type="number" id="boatWeight" name="boatWeight" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="notes">{% include i18n.html section='booking' key='notes' %}</label>
+                <textarea id="notes" name="notes" rows="4"></textarea>
+            </div>
+            
+            <button type="submit" class="button">{% include i18n.html section='booking' key='submit' %}</button>
+        </form>
+    </div>
+</div> 

@@ -1,0 +1,108 @@
+---
+layout: default
+title: Fasiliteter
+lang: no
+---
+
+<div class="facilities-container section">
+    <h1>{% include i18n.html section='facilities' key='title' %}</h1>
+
+    <!-- Dimensions Section -->
+    <section class="dimensions">
+        <h2>{% include i18n.html section='facilities' key='dimensions.title' %}</h2>
+        
+        <div class="dimensions-grid">
+            <div class="facility-type">
+                <h3>{% include i18n.html section='facilities' key='dimensions.outdoor.title' %}</h3>
+                <ul>
+                    <li>{% include i18n.html section='facilities' key='dimensions.outdoor.length' %}: 24m</li>
+                    <li>{% include i18n.html section='facilities' key='dimensions.outdoor.width' %}: 6m</li>
+                    <li>{% include i18n.html section='facilities' key='dimensions.outdoor.depth' %}: 3m</li>
+                </ul>
+            </div>
+
+            <div class="facility-type">
+                <h3>{% include i18n.html section='facilities' key='dimensions.indoor.title' %}</h3>
+                <ul>
+                    <li>{% include i18n.html section='facilities' key='dimensions.indoor.length' %}: 18m</li>
+                    <li>{% include i18n.html section='facilities' key='dimensions.indoor.width' %}: 5,5m</li>
+                    <li>{% include i18n.html section='facilities' key='dimensions.indoor.depth' %}: 2,5m</li>
+                    <li>{% include i18n.html section='facilities' key='dimensions.indoor.height' %}: 8,5m</li>
+                </ul>
+            </div>
+
+            <div class="facility-type">
+                <h3>{% include i18n.html section='facilities' key='dimensions.floating.title' %}</h3>
+                <ul>
+                    <li>{% include i18n.html section='facilities' key='dimensions.floating.length' %}: 18m</li>
+                    <li>{% include i18n.html section='facilities' key='dimensions.floating.width' %}: 5,4m</li>
+                    <li>{% include i18n.html section='facilities' key='dimensions.floating.depth' %}: 2,5-5m</li>
+                    <li>{% include i18n.html section='facilities' key='dimensions.floating.height' %}: 4,5m</li>
+                </ul>
+            </div>
+
+            <div class="facility-type">
+                <h3>{% include i18n.html section='facilities' key='dimensions.workshop.title' %}</h3>
+                <ul>
+                    <li>{% include i18n.html section='facilities' key='dimensions.workshop.length' %}: 11m</li>
+                    <li>{% include i18n.html section='facilities' key='dimensions.workshop.width' %}: 5m</li>
+                    <li>{% include i18n.html section='facilities' key='dimensions.workshop.height' %}: 4m</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <h2>{% include i18n.html section='facilities' key='pricing.title' %}</h2>
+
+        <div class="price-section">
+            <h3>{% include i18n.html section='facilities' key='pricing.slipping.title' %}</h3>
+            <div class="price-grid">
+                <div class="price-category">
+                    {% for item in site.data.i18n[page.lang].facilities.pricing.slipping.outdoor %}
+                    <div class="price-item">
+                        <span class="desc">{{ item.desc }}</span>
+                        <span class="price">{{ item.price }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="price-category">
+                    {% for item in site.data.i18n[page.lang].facilities.pricing.slipping.indoor %}
+                    <div class="price-item">
+                        <span class="desc">{{ item.desc }}</span>
+                        <span class="price">{{ item.price }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="price-section">
+            <h3>{% include i18n.html section='facilities' key='pricing.daily.title' %}</h3>
+            <div class="price-grid">
+                <div class="price-item">
+                    <span class="desc">{% include i18n.html section='facilities' key='dimensions.outdoor.title' %}</span>
+                    <span class="price">{{ site.data.i18n[page.lang].facilities.pricing.daily.outdoor }}</span>
+                </div>
+                <div class="price-item">
+                    <span class="desc">{% include i18n.html section='facilities' key='dimensions.indoor.title' %}</span>
+                    <span class="price">{{ site.data.i18n[page.lang].facilities.pricing.daily.indoor }}</span>
+                </div>
+                <div class="price-item">
+                    <span class="desc">{% include i18n.html section='facilities' key='pricing.daily.sunday' %}</span>
+                    <span class="price">{{ site.data.i18n[page.lang].facilities.pricing.daily.sunday }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="price-section">
+            <h3>{% include i18n.html section='facilities' key='pricing.other.pressure_washer.title' %}</h3>
+            <p>{{ site.data.i18n[page.lang].facilities.pricing.other.pressure_washer.included }}, {{ site.data.i18n[page.lang].facilities.pricing.other.pressure_washer.extra }}</p>
+        </div>
+
+        <div class="price-note">
+            <p>{{ site.data.i18n[page.lang].facilities.pricing.note }}</p>
+        </div>
+    </section>
+</div> 

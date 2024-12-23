@@ -1,0 +1,8 @@
+{%- assign section = include.section | default: 'home' -%}
+{%- assign key_parts = include.key | split: '.' -%}
+{%- assign lang = include.lang | default: page.lang | default: 'no' -%}
+{%- assign translation = site.data.i18n[lang][section] -%}
+{%- for part in key_parts -%}
+    {%- assign translation = translation[part] -%}
+{%- endfor -%}
+{{- translation -}} 

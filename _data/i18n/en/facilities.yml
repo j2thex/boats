@@ -1,0 +1,62 @@
+title: Facilities and Prices
+dimensions:
+  title: Slipway Dimensions
+  outdoor:
+    title: Outdoor Slipway
+    length: Length
+    width: Width
+    depth: Depth
+  indoor:
+    title: Indoor Slipway
+    length: Length
+    width: Width
+    depth: Depth
+    height: Height
+  floating:
+    title: Floating Dock
+    length: Length
+    width: Width
+    depth: Depth
+    height: Height
+  workshop:
+    title: Workshop
+    length: Length
+    width: Width
+    height: Height
+
+pricing:
+  title: Price List 2025
+  slipping:
+    title: Slipping (2 days)
+    outdoor:
+      - desc: up to 49 feet/ 25 tons
+        price: 85kr per foot
+      - desc: from 50 feet/ 25 tons
+        price: 105kr per foot
+      - desc: from 65 feet/ 50 tons
+        price: 115kr per foot
+      - desc: from 100 tons
+        price: 130kr per foot
+    indoor:
+      - desc: up to 49 feet
+        price: 100kr per foot
+      - desc: from 50 feet
+        price: 120kr per foot
+  daily:
+    title: Daily Rate after 2 days
+    outdoor: 1100kr
+    indoor: 1300kr
+    sunday: 500kr
+  lifting:
+    title: Lifting/Launching
+    evening: 1500kr
+    weekend: 2000kr
+    holiday: 2500kr
+  other:
+    pressure_washer: 
+      title: Pressure Washer Use
+      included: 45min included in slipway fee
+      extra: then 175kr per 30min
+    environmental_fee: 100kr
+    work_rate: 800kr per hour
+  note: All prices exclude VAT. 

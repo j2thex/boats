@@ -1,27 +1,22 @@
 ---
-layout: default
-title: Home
+layout: null
 ---
-
-<div class="home-container">
-    <div class="hero">
-        <h1>Welcome to Boats & Cranes</h1>
-        <p>Professional boat crane services for all your needs.</p>
-        <a href="/book/" class="button">Book Now</a>
-    </div>
-
-    <div class="features">
-        <div class="feature">
-            <h2>Professional Service</h2>
-            <p>Expert crane operators with years of experience</p>
-        </div>
-        <div class="feature">
-            <h2>Easy Booking</h2>
-            <p>Simple online booking system with real-time availability</p>
-        </div>
-        <div class="feature">
-            <h2>Safe & Secure</h2>
-            <p>Fully insured and certified equipment</p>
-        </div>
-    </div>
-</div> 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ site.title }}</title>
+    <script>
+        const savedLang = localStorage.getItem('language');
+        const userLang = navigator.language || navigator.userLanguage;
+        const lang = savedLang || (userLang.startsWith('no') ? 'no' : 'en');
+        window.location.href = '/' + lang + '/';
+    </script>
+    <noscript>
+        <meta http-equiv="refresh" content="0; url=/en/">
+    </noscript>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html> 

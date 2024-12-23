@@ -1,0 +1,27 @@
+nav:
+  home: Home
+  book: Book
+  contact: Contact
+home:
+  welcome: Welcome to Boats & Cranes
+  subtitle: Professional boat crane services for all your needs
+  book_now: Book Now
+  features:
+    professional:
+      title: Professional Service
+      desc: Expert crane operators with years of experience
+    booking:
+      title: Easy Booking
+      desc: Simple online booking system with real-time availability
+    safety:
+      title: Safe & Secure
+      desc: Fully insured and certified equipment
+booking:
+  title: Book Crane Service
+  additional_details: Additional Details
+  boat_length: Boat Length (meters)
+  boat_weight: Boat Weight (kg)
+  notes: Additional Notes
+  submit: Submit Additional Details
+footer:
+  rights: All rights reserved. 

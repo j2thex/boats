@@ -1,0 +1,62 @@
+title: Fasiliteter og Priser
+dimensions:
+  title: Slippdimensjoner
+  outdoor:
+    title: Uteslipp
+    length: Lengde
+    width: Bredde
+    depth: Dybde
+  indoor:
+    title: Inneslipp
+    length: Lengde
+    width: Bredde
+    depth: Dybde
+    height: Høyde
+  floating:
+    title: Flytenaust
+    length: Lengde
+    width: Bredde
+    depth: Dybde
+    height: Høyde
+  workshop:
+    title: Verksted
+    length: Lengde
+    width: Bredde
+    height: Høyde
+
+pricing:
+  title: Prisliste 2025
+  slipping:
+    title: Slipping (2 døgn)
+    outdoor:
+      - desc: t.o.m. 49 fot/ 25 tonn
+        price: 85kr pr.fot
+      - desc: f.o.m 50 fot/ 25 tonn
+        price: 105kr pr.fot
+      - desc: f.o.m 65 fot/ 50 tonn
+        price: 115kr pr.fot
+      - desc: f.o.m 100 tonn
+        price: 130kr pr.fot
+    indoor:
+      - desc: t.o.m 49 fot
+        price: 100kr pr.fot
+      - desc: f.o.m 50 fot
+        price: 120kr pr.fot
+  daily:
+    title: Dagsleie etter 2 døgn
+    outdoor: 1100kr
+    indoor: 1300kr
+    sunday: 500kr
+  lifting:
+    title: Opptak/utsetting
+    evening: 1500kr
+    weekend: 2000kr
+    holiday: 2500kr
+  other:
+    pressure_washer: 
+      title: Bruk av høytrykkspyler
+      included: 45min. inkl. i slippavgift
+      extra: deretter 175kr - 30min
+    environmental_fee: 100kr
+    work_rate: 800kr pr. time
+  note: Alle priser er eks.mva. 
