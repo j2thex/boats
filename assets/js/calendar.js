@@ -1,8 +1,7 @@
 // Google Calendar API configuration
 const CALENDAR_CONFIG = {
-  apiKey: 'YOUR_API_KEY',
-  calendarId: 'YOUR_CALENDAR_ID',
-  // Add these fields in _config.yml and use Liquid to inject them
+  apiKey: '{{ site.google_calendar.api_key }}',
+  calendarId: '{{ site.google_calendar.calendar_id }}',
 };
 
 class BookingCalendar {
@@ -13,20 +12,11 @@ class BookingCalendar {
 
   loadGoogleAPI() {
     const script = document.createElement('script');
-    script.src = 'https://apis.google.com/js/api.js';
+    script.src = 'https://apis.google.com/js/api.js?key=' + CALENDAR_CONFIG.apiKey;
     script.onload = () => {
-      gapi.load('client', this.initGoogleClient.bind(this));
+      this.loadAvailableSlots();
     };
     document.body.appendChild(script);
-  }
-
-  async initGoogleClient() {
-    await gapi.client.init({
-      apiKey: CALENDAR_CONFIG.apiKey,
-      discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
-    });
-    
-    this.loadAvailableSlots();
   }
 
   async loadAvailableSlots() {
@@ -35,16 +25,17 @@ class BookingCalendar {
     thirtyDaysFromNow.setDate(today.getDate() + 30);
 
     try {
-      const response = await gapi.client.calendar.events.list({
-        calendarId: CALENDAR_CONFIG.calendarId,
+      const response = await fetch(`https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_CONFIG.calendarId}/events?` + new URLSearchParams({
+        key: CALENDAR_CONFIG.apiKey,
         timeMin: today.toISOString(),
         timeMax: thirtyDaysFromNow.toISOString(),
         showDeleted: false,
         singleEvents: true,
         orderBy: 'startTime'
-      });
+      }));
 
-      this.availableSlots = this.processSlots(response.result.items);
+      const data = await response.json();
+      this.availableSlots = this.processSlots(data.items || []);
       this.updateDatePicker();
     } catch (error) {
       console.error('Error loading calendar slots:', error);

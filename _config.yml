@@ -1,7 +1,8 @@
 title: Boats & Cranes
 description: Professional boat crane services
 baseurl: ""
-url: ""
+url: "https://hunsbeth.com"
+domain: hunsbeth.com
 
 markdown: kramdown
 plugins:
@@ -13,5 +14,5 @@ sass:
   sass_dir: _sass 
 
 google_calendar:
-  api_key: "YOUR_API_KEY"
-  calendar_id: "YOUR_CALENDAR_ID"
+  api_key: "AIzaSyBjijNYbPIcNAaKBbJwgVPg3u3H6nW4ZAA"
+  calendar_id: "boats-cranes@boats-445515.iam.gserviceaccount.com"
