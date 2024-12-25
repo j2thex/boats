@@ -8,3 +8,6 @@ _site/
 _config_secrets.yml
 *.env
 .env*
+boats-445515-a93dda172bbe.json
+*-credentials.json
+service-account.json
