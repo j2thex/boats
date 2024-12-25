@@ -1,0 +1,46 @@
+- id: outdoor-slip
+  name: Outdoor Slip
+  capacity: "Up to 80 feet"
+  calendar_id: "your-calendar-id-1"  # We'll replace these with actual Google Calendar IDs
+  dimensions:
+    - "Length: 24m"
+    - "Width: 6m"
+    - "Depth: 3m"
+  features:
+    - High-pressure cleaning equipment
+    - Professional hull inspection
+    - Anti-fouling application
+    - Hull maintenance and repair
+    - Modern lifting equipment
+
+- id: indoor-slip
+  name: Indoor Slip
+  capacity: "Up to 60 feet"
+  calendar_id: "your-calendar-id-2"
+  dimensions:
+    - "Length: 18m"
+    - "Width: 5.5m"
+    - "Depth: 2.5m"
+    - "Height: 8.5m"
+  features:
+    - Weather-protected workspace
+    - Professional hull inspection
+    - Anti-fouling application
+    - Hull maintenance and repair
+    - Climate-controlled environment
+
+- id: floating-dock
+  name: Floating Boathouse
+  capacity: "Up to 60 feet"
+  calendar_id: "your-calendar-id-3"
+  dimensions:
+    - "Length: 18m"
+    - "Width: 5.4m"
+    - "Depth: 2.5-5m"
+    - "Height: 4.5m"
+  features:
+    - Protected from weather
+    - Easy access
+    - Flexible depth range
+    - Ideal for maintenance work
+    - Stable working platform

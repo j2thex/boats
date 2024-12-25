@@ -1,0 +1,45 @@
+# Site settings
+title: Naustvik Slipp & Båtbyggeri
+email: post@naustvikslipp.no
+baseurl: ""
+url: "https://hunsbeth.com"
+
+# Build settings
+markdown: kramdown
+
+# Sass settings
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Languages
+languages:
+  - code: "en"
+    name: "English"
+  - code: "no"
+    name: "Norsk"
+
+# Default settings
+defaults:
+  - scope:
+      path: ""      # All files
+    values:
+      layout: "default"
+      lang: "en"    # Default language
+  - scope:
+      path: "en/**/*"    # Files in en directory
+    values:
+      layout: "default"
+      lang: "en"
+  - scope:
+      path: "no/**/*"    # Files in no directory
+    values:
+      layout: "default"
+      lang: "no"
+
+# Exclude files
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - .jekyll-cache/

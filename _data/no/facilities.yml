@@ -1,0 +1,46 @@
+- id: outdoor-slip
+  name: Uteslipp
+  capacity: "Opptil 80 fot"
+  calendar_id: "your-calendar-id-1"  # Same calendar IDs as English version
+  dimensions:
+    - "Lengde: 24m"
+    - "Bredde: 6m"
+    - "Dybde: 3m"
+  features:
+    - Høytrykks vaskeutstyr
+    - Profesjonell skroginspeksjon
+    - Bunnstoff påføring
+    - Skrogvedlikehold og reparasjon
+    - Moderne løfteutstyr
+
+- id: indoor-slip
+  name: Inneslipp
+  capacity: "Opptil 60 fot"
+  calendar_id: "your-calendar-id-2"
+  dimensions:
+    - "Lengde: 18m"
+    - "Bredde: 5,5m"
+    - "Dybde: 2,5m"
+    - "Høyde: 8,5m"
+  features:
+    - Værbeskyttet arbeidsområde
+    - Profesjonell skroginspeksjon
+    - Bunnstoff påføring
+    - Skrogvedlikehold og reparasjon
+    - Klimakontrollert miljø
+
+- id: floating-dock
+  name: Flytenaust
+  capacity: "Opptil 60 fot"
+  calendar_id: "your-calendar-id-3"
+  dimensions:
+    - "Lengde: 18m"
+    - "Bredde: 5,4m"
+    - "Dybde: 2,5-5m"
+    - "Høyde: 4,5m"
+  features:
+    - Beskyttet mot vær
+    - Enkel tilgang
+    - Fleksibel dybderekkevidde
+    - Ideell for vedlikeholdsarbeid
+    - Stabil arbeidsplattform

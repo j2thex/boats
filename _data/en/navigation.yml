@@ -1,0 +1,7 @@
+- title: Home
+  url: /en/
+- title: Facilities
+  url: /en/facilities
+- title: Book Now
+  url: /en/book
+  highlight: true 

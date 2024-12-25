@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- Debug Info:
+- page.url: {{ page.url }}
+- page.lang: {{ page.lang }}
+-->
+{% if page.url contains '/no/' %}
+  {% assign current_lang = 'no' %}
+{% else %}
+  {% assign current_lang = 'en' %}
+{% endif %}
+<html lang="{{ current_lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ site.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+</head>
+<body>
+    {% include header.html %}
+
+    <main>
+        {{ content }}
+    </main>
+
+    <footer>
+        <p>© {{ 'now' | date: "%Y" }} {{ site.title }}</p>
+    </footer>
+</body>
+</html>

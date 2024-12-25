@@ -1,0 +1,7 @@
+- title: Hjem
+  url: /no/
+- title: Anlegg
+  url: /no/facilities
+- title: Bestill Nå
+  url: /no/book
+  highlight: true 

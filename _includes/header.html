@@ -1,0 +1,29 @@
+<header class="site-header">
+    <!-- Debug Info -->
+    <div style="display: none;">
+        <p>Current page.lang: {{ current_lang }}</p>
+        <p>Navigation data: {{ site.data[current_lang].navigation | inspect }}</p>
+        <p>All site.data: {{ site.data | inspect }}</p>
+    </div>
+
+    <div class="header-content">
+        <a href="/{{ current_lang }}/" class="site-title">
+            {{ site.title }}
+        </a>
+        
+        <nav class="main-nav">
+            {% for item in site.data[current_lang].navigation %}
+            <a href="{{ item.url }}" 
+               class="nav-link {% if item.highlight %}highlight{% endif %} {% if page.url == item.url %}active{% endif %}">
+                {{ item.title }}
+            </a>
+            {% endfor %}
+        </nav>
+
+        <div class="language-switcher">
+            {% assign page_path = page.url | split: current_lang | last | remove_first: '/' %}
+            <a href="/en{% if page_path != '' %}/{{ page_path }}{% endif %}" {% if current_lang == 'en' %}class="active"{% endif %}>EN</a>
+            <a href="/no{% if page_path != '' %}/{{ page_path }}{% endif %}" {% if current_lang == 'no' %}class="active"{% endif %}>NO</a>
+        </div>
+    </div>
+</header> 
