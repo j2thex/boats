@@ -2,6 +2,10 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
+
+    @media (max-width: 768px) {
+        padding: 1rem;
+    }
 }
 
 .facility-selection {
@@ -71,21 +75,49 @@
     }
 }
 
-#calendar-container {
+.calendar-form-container {
+    display: flex;
+    gap: 2rem;
     margin: 2rem 0;
+    align-items: flex-start;
+
+    @media (max-width: 1200px) {
+        flex-direction: column;
+        margin: 1rem 0;
+        gap: 1rem;
+    }
+}
+
+#calendar-container {
+    flex: 1;
     padding: 1rem;
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    min-width: 0; // Prevents flex item from overflowing
+
+    @media (max-width: 1200px) {
+        width: 100%;
+        padding: 0.5rem;
+    }
 }
 
 #booking-form {
-    max-width: 600px;
-    margin: 2rem auto;
-    padding: 2rem;
+    flex: 0 0 350px; // Fixed width for the form
+    margin: 0; // Remove default margin
+    padding: 1.5rem;
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 2rem; // Stick to top with some padding
+
+    @media (max-width: 1200px) {
+        flex: none;
+        width: 100%;
+        position: static;
+        padding: 1rem;
+    }
 
     .form-group {
         margin-bottom: 1.5rem;
@@ -106,6 +138,12 @@
             &:focus {
                 outline: none;
                 border-color: #1a5f7a;
+            }
+
+            &:disabled {
+                background-color: #f8f9fa;
+                cursor: not-allowed;
+                opacity: 0.8;
             }
         }
     }
@@ -139,4 +177,70 @@
     color: #721c24;
     background-color: #f8d7da;
     border: 1px solid #f5c6cb;
+}
+
+.fc-event {
+    background-color: #e74c3c !important;
+    border-color: #c0392b !important;
+    padding: 2px 4px !important;
+}
+
+.fc-event-title {
+    color: white;
+    font-weight: 500;
+    text-align: center;
+}
+
+// Make calendar more compact
+.fc {
+    font-size: 0.85em;  // Even smaller font
+    
+    @media (max-width: 768px) {
+        font-size: 0.8em;  // Even smaller on mobile
+    }
+
+    .fc-toolbar {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem !important;
+
+        @media (max-width: 768px) {
+            justify-content: center;
+            
+            .fc-toolbar-chunk {
+                flex: 0 0 100%;
+                text-align: center;
+                margin-bottom: 0.5rem;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    .fc-toolbar-title {
+        font-size: 1.1em !important;  // Smaller title
+    }
+
+    .fc-button {
+        padding: 0.2em 0.5em !important;  // Smaller buttons
+        font-size: 0.9em !important;
+    }
+
+    // Compact day cells
+    .fc-daygrid-day-frame {
+        min-height: 60px !important;
+    }
+
+    // Past dates styling
+    .fc-day-past {
+        background-color: #f8f9fa;
+        opacity: 0.7;
+    }
+
+    // Today's date
+    .fc-day-today {
+        background-color: #e8f4f8 !important;
+    }
 }

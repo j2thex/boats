@@ -4,6 +4,7 @@ title: Book a Facility
 lang: "en"
 ref: book
 permalink: /en/book/
+calendar_api_key: AIzaSyBjijNYbPIcNAaKBbJwgVPg3u3H6nW4ZAA
 ---
 
 <div class="booking-container">
@@ -34,81 +35,69 @@ permalink: /en/book/
         </div>
     </div>
 
-    <!-- Calendar View -->
-    <div id="calendar-container" style="display: none;">
-        <h2>Facility Availability</h2>
-        <div id="calendar"></div>
-    </div>
+    <!-- Calendar and Form Container -->
+    <div class="calendar-form-container" style="display: none;" id="calendar-form-container">
+        <!-- Calendar View -->
+        <div id="calendar-container">
+            <h2>Facility Availability</h2>
+            <div id="calendar"></div>
+        </div>
 
-    <!-- Booking Form (initially hidden) -->
-    <form id="booking-form" style="display: none;">
-        <h2>Booking Details</h2>
-        <div class="form-group">
-            <label for="date">Date:</label>
-            <input type="date" id="date" name="date" required>
-        </div>
-        <div class="form-group">
-            <label for="time">Time:</label>
-            <input type="time" id="time" name="time" required>
-        </div>
-        <div class="form-group">
-            <label for="duration">Duration:</label>
-            <select id="duration" name="duration" required>
-                <option value="2">2 days (standard)</option>
-                <option value="3">3 days</option>
-                <option value="4">4 days</option>
-                <option value="5">5 days</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="boat-length">Boat Length (meters):</label>
-            <input type="number" id="boat-length" name="boat-length" required>
-        </div>
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-            <label for="phone">Phone:</label>
-            <input type="tel" id="phone" name="phone" required>
-        </div>
-        <button type="submit">Book Now</button>
-    </form>
+        <!-- Booking Form -->
+        <form id="booking-form" action="https://formspree.io/f/YOUR-FORMSPREE-ID" method="POST">
+            <h2>Booking Details</h2>
+            <input type="hidden" name="facility" id="facility-input">
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="time" required>
+            </div>
+            <div class="form-group">
+                <label for="duration">Duration:</label>
+                <select id="duration" name="duration" required>
+                    <option value="2">2 days (Mon-Wed or Wed-Fri)</option>
+                    <option value="4">4 days (Mon-Fri)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="boat-length">Boat Length (meters):</label>
+                <input type="number" id="boat-length" name="boat-length" min="1" max="80" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <button type="submit" id="submit-button">Book Now</button>
+            <div id="form-status" style="display: none;"></div>
+        </form>
+    </div>
 </div>
 
-<!-- Add Google Calendar API -->
-<script src="https://apis.google.com/js/api.js"></script>
-
-<!-- Add FullCalendar -->
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
-
 <script>
-const API_KEY = '{{ site.google_calendar.api_key }}';
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Google Calendar API
-    gapi.load('client', initClient);
-});
-
-function initClient() {
-    gapi.client.init({
-        apiKey: API_KEY,
-        discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']
-    }).then(function() {
-        console.log('Google Calendar API initialized');
-    }).catch(function(error) {
-        console.error('Error initializing Google Calendar API:', error);
-    });
-}
+// Get API key from page front matter
+const API_KEY = '{{ page.calendar_api_key }}';
 
 function selectFacility(facilityId, calendarId) {
-    // Show calendar
-    const calendarContainer = document.getElementById('calendar-container');
-    calendarContainer.style.display = 'block';
+    console.log('Selected calendar ID:', calendarId);
+    console.log('API Key:', API_KEY);
+    
+    // Store facility info
+    document.getElementById('facility-input').value = facilityId;
+    
+    // Show calendar and form container
+    const container = document.getElementById('calendar-form-container');
+    container.style.display = 'flex';
     
     // Add loading state
     const calendarEl = document.getElementById('calendar');
@@ -117,16 +106,127 @@ function selectFacility(facilityId, calendarId) {
     // Initialize FullCalendar
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        events: {
+        googleCalendarApiKey: API_KEY,
+        eventSources: [{
             googleCalendarId: calendarId,
-            className: 'gcal-event'
+            className: 'gcal-event',
+            failure: function(error) {
+                console.error('Error loading events:', error);
+                calendarEl.innerHTML = '<div class="calendar-error">Unable to load calendar. Please try again later.</div>';
+            }
+        }],
+        validRange: {
+            start: new Date()  // Don't show dates before today
+        },
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: ''  // Remove unnecessary views
+        },
+        eventDidMount: function(info) {
+            console.log('Event mounted:', info.event);
+        },
+        eventDisplay: 'block',
+        displayEventTime: false,
+        eventContent: function(arg) {
+            return {
+                html: '<div class="fc-event-title">Booked</div>'
+            };
         },
         dateClick: function(info) {
-            // Show booking form when a date is clicked
-            document.getElementById('booking-form').style.display = 'block';
+            const clickedDate = info.date;
+            const dayOfWeek = clickedDate.getDay(); // 0 = Sunday, 1 = Monday, ...
+            
+            // Don't allow selecting past dates
+            if (clickedDate < new Date()) {
+                return;
+            }
+
+            // Only allow selecting Mondays and Wednesdays
+            if (dayOfWeek !== 1 && dayOfWeek !== 3) {
+                alert('Please select a Monday or Wednesday to start your booking.\n\nMonday bookings can be for 2 days (until Wednesday) or 4 days (until Friday).\nWednesday bookings are for 2 days (until Friday).');
+                return;
+            }
+
+            // Show booking form
+            const bookingForm = document.getElementById('booking-form');
+            bookingForm.style.display = 'block';
+            
+            // Set date and time
             document.getElementById('date').value = info.dateStr;
+            document.getElementById('time').value = '09:00';
+            
+            // Set duration options based on day
+            const durationSelect = document.getElementById('duration');
+            if (dayOfWeek === 1) { // Monday
+                durationSelect.disabled = false;
+                durationSelect.value = '2';
+            } else { // Wednesday
+                durationSelect.value = '2';
+                durationSelect.disabled = true; // Only 2 days possible from Wednesday
+            }
+            
+            // Disable time selection - always 9 AM
+            document.getElementById('time').disabled = true;
         }
     });
     calendar.render();
 }
+
+// Form submission handling
+const form = document.getElementById('booking-form');
+const formStatus = document.getElementById('form-status');
+const submitButton = document.getElementById('submit-button');
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Disable submit button
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
+    
+    // Show loading status
+    formStatus.style.display = 'block';
+    formStatus.innerHTML = '<div class="calendar-loading">Sending booking request...</div>';
+    
+    // Get end date based on duration
+    const startDate = new Date(document.getElementById('date').value);
+    const duration = parseInt(document.getElementById('duration').value);
+    const endDate = new Date(startDate);
+    endDate.setDate(endDate.getDate() + duration);
+    
+    // Add end date to form data
+    const formData = new FormData(form);
+    formData.append('end_date', endDate.toISOString().split('T')[0]);
+    
+    // Send form data
+    fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Show success message
+        formStatus.innerHTML = '<div class="calendar-success">Booking request sent! We will contact you shortly to confirm your booking.</div>';
+        form.reset();
+        
+        // Re-enable submit button
+        submitButton.disabled = false;
+        submitButton.textContent = 'Book Now';
+        
+        // Refresh calendar to show new booking
+        calendar.refetchEvents();
+    })
+    .catch(error => {
+        // Show error message
+        formStatus.innerHTML = '<div class="calendar-error">Sorry, there was a problem sending your booking. Please try again or contact us directly.</div>';
+        
+        // Re-enable submit button
+        submitButton.disabled = false;
+        submitButton.textContent = 'Book Now';
+    });
+});
 </script>

@@ -6,3 +6,5 @@ _site/
 
 # Secrets
 _config_secrets.yml
+*.env
+.env*

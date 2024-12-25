@@ -14,6 +14,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ site.title }}</title>
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    {% if page.ref == 'book' %}
+    {% include calendar-scripts.html %}
+    {% endif %}
 </head>
 <body>
     {% include header.html %}

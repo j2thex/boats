@@ -10,6 +10,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Naustvik Slipp & Båtbyggeri</title>
     <link rel="stylesheet" href="/assets/css/main.css">
+    
+    <!-- Add FullCalendar -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/google-calendar@6.1.10/index.global.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/locales/nb.global.min.js'></script>
+
+<script>
+    window.CALENDAR_CONFIG = {
+        apiKey: ''
+    };
+</script> 
+    
 </head>
 <body>
     <header class="site-header">
@@ -129,63 +141,64 @@
         </div>
     </div>
 
-    <!-- Calendar View -->
-    <div id="calendar-container" style="display: none;">
-        <h2>Anlegg Tilgjengelighet</h2>
-        <div id="calendar"></div>
-    </div>
+    <!-- Calendar and Form Container -->
+    <div class="calendar-form-container" style="display: none;" id="calendar-form-container">
+        <!-- Calendar View -->
+        <div id="calendar-container">
+            <h2>Anlegg Tilgjengelighet</h2>
+            <div id="calendar"></div>
+        </div>
 
-    <!-- Booking Form (initially hidden) -->
-    <form id="booking-form" style="display: none;">
-        <h2>Bestillingsdetaljer</h2>
-        <div class="form-group">
-            <label for="date">Dato:</label>
-            <input type="date" id="date" name="date" required>
-        </div>
-        <div class="form-group">
-            <label for="time">Tid:</label>
-            <input type="time" id="time" name="time" required>
-        </div>
-        <div class="form-group">
-            <label for="duration">Varighet:</label>
-            <select id="duration" name="duration" required>
-                <option value="2">2 dager (standard)</option>
-                <option value="3">3 dager</option>
-                <option value="4">4 dager</option>
-                <option value="5">5 dager</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="boat-length">Båtlengde (meter):</label>
-            <input type="number" id="boat-length" name="boat-length" required>
-        </div>
-        <div class="form-group">
-            <label for="name">Navn:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <div class="form-group">
-            <label for="email">E-post:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-            <label for="phone">Telefon:</label>
-            <input type="tel" id="phone" name="phone" required>
-        </div>
-        <button type="submit">Bestill Nå</button>
-    </form>
+        <!-- Booking Form -->
+        <form id="booking-form">
+            <h2>Bestillingsdetaljer</h2>
+            <div class="form-group">
+                <label for="date">Dato:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="time">Tid:</label>
+                <input type="time" id="time" name="time" required>
+            </div>
+            <div class="form-group">
+                <label for="duration">Varighet:</label>
+                <select id="duration" name="duration" required>
+                    <option value="2">2 dager (man-ons eller ons-fre)</option>
+                    <option value="4">4 dager (man-fre)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="boat-length">Båtlengde (meter):</label>
+                <input type="number" id="boat-length" name="boat-length" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Navn:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">E-post:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Telefon:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <button type="submit">Bestill Nå</button>
+        </form>
+    </div>
 </div>
 
-<!-- Add Google Calendar API -->
-<script src="https://apis.google.com/js/api.js"></script>
-
-<!-- Add FullCalendar -->
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
-
 <script>
+// Get API key from page front matter
+const API_KEY = 'AIzaSyBjijNYbPIcNAaKBbJwgVPg3u3H6nW4ZAA';
+
 function selectFacility(facilityId, calendarId) {
-    // Show calendar
-    const calendarContainer = document.getElementById('calendar-container');
-    calendarContainer.style.display = 'block';
+    console.log('Selected calendar ID:', calendarId);
+    console.log('API Key:', API_KEY);
+    
+    // Show calendar and form container
+    const container = document.getElementById('calendar-form-container');
+    container.style.display = 'flex';
     
     // Add loading state
     const calendarEl = document.getElementById('calendar');
@@ -195,14 +208,68 @@ function selectFacility(facilityId, calendarId) {
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         locale: 'nb',  // Norwegian locale
-        events: {
+        googleCalendarApiKey: API_KEY,
+        eventSources: [{
             googleCalendarId: calendarId,
-            className: 'gcal-event'
+            className: 'gcal-event',
+            failure: function(error) {
+                console.error('Error loading events:', error);
+                calendarEl.innerHTML = '<div class="calendar-error">Kunne ikke laste kalenderen. Vennligst prøv igjen senere.</div>';
+            }
+        }],
+        validRange: {
+            start: new Date()  // Don't show dates before today
+        },
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: ''  // Remove unnecessary views
+        },
+        eventDidMount: function(info) {
+            console.log('Event mounted:', info.event);
+        },
+        eventDisplay: 'block',
+        displayEventTime: false,
+        eventContent: function(arg) {
+            return {
+                html: '<div class="fc-event-title">Opptatt</div>'
+            };
         },
         dateClick: function(info) {
-            // Show booking form when a date is clicked
-            document.getElementById('booking-form').style.display = 'block';
+            const clickedDate = info.date;
+            const dayOfWeek = clickedDate.getDay(); // 0 = Sunday, 1 = Monday, ...
+            
+            // Don't allow selecting past dates
+            if (clickedDate < new Date()) {
+                return;
+            }
+
+            // Only allow selecting Mondays and Wednesdays
+            if (dayOfWeek !== 1 && dayOfWeek !== 3) {
+                alert('Vennligst velg en mandag eller onsdag for å starte bestillingen.\n\nMandag-bestillinger kan være 2 dager (til onsdag) eller 4 dager (til fredag).\nOnsdag-bestillinger er for 2 dager (til fredag).');
+                return;
+            }
+
+            // Show booking form
+            const bookingForm = document.getElementById('booking-form');
+            bookingForm.style.display = 'block';
+            
+            // Set date and time
             document.getElementById('date').value = info.dateStr;
+            document.getElementById('time').value = '09:00';
+            
+            // Set duration options based on day
+            const durationSelect = document.getElementById('duration');
+            if (dayOfWeek === 1) { // Monday
+                durationSelect.disabled = false;
+                durationSelect.value = '2';
+            } else { // Wednesday
+                durationSelect.value = '2';
+                durationSelect.disabled = true; // Only 2 days possible from Wednesday
+            }
+            
+            // Disable time selection - always 9 AM
+            document.getElementById('time').disabled = true;
         }
     });
     calendar.render();
