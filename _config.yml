@@ -43,3 +43,4 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - .jekyll-cache/
+  - _config_secrets.yml

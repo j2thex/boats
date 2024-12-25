@@ -1,7 +1,7 @@
 - id: outdoor-slip
   name: Outdoor Slip
   capacity: "Up to 80 feet"
-  calendar_id: "your-calendar-id-1"  # We'll replace these with actual Google Calendar IDs
+  calendar_id: "your-calendar-id-1"  # We'll replace this later
   dimensions:
     - "Length: 24m"
     - "Width: 6m"
@@ -16,7 +16,7 @@
 - id: indoor-slip
   name: Indoor Slip
   capacity: "Up to 60 feet"
-  calendar_id: "your-calendar-id-2"
+  calendar_id: "74bd1142537d32c30a950c6e0cd36e7c42062a8b39f17bc19192e355dbc6c868@group.calendar.google.com"  # Your actual indoor slip calendar ID
   dimensions:
     - "Length: 18m"
     - "Width: 5.5m"
@@ -32,7 +32,7 @@
 - id: floating-dock
   name: Floating Boathouse
   capacity: "Up to 60 feet"
-  calendar_id: "your-calendar-id-3"
+  calendar_id: "your-calendar-id-3"  # We'll replace this later
   dimensions:
     - "Length: 18m"
     - "Width: 5.4m"
